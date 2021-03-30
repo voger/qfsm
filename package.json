@@ -2,6 +2,7 @@
   "name": "qfsm",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +13,6 @@
     "@qooxdoo/compiler": "^1.0.0",
     "@qooxdoo/framework": "^6.0.1",
     "eslint": "^7.23.0",
-    "prettify": "^0.1.7"
+    "prettier": "^2.2.1"
   }
 }
