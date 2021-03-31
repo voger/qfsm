@@ -18,6 +18,6 @@ qx.Theme.define("fsm.theme.Color", {
     "yellow-bulb"     : "#f1c40f",
     "green-bulb"      : "#2ecc71",
     "dark-bulb"       : "#1f2b38",
-    "bulb-reflection" : "#a5aaaf"
+    "bulb-reflection" : "#FFFFFF"
   }
 });

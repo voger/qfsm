@@ -37,14 +37,27 @@ qx.Theme.define("fsm.theme.Appearance", {
     },
 
     "trafic-light-device/red-bulb": {
-      style() {
+      style(states) {
         return {
-          bulbColor: "dark-bulb"
+          bulbColor: states.illuminated ? "red-bulb" : "dark-bulb"
         };
       }
     },
 
-    "trafic-light-device/yellow-bulb": "trafic-light-device/red-bulb",
-    "trafic-light-device/green-bulb": "trafic-light-device/red-bulb"
+    "trafic-light-device/yellow-bulb": {
+      style(states) {
+        return {
+          bulbColor: states.illuminated ? "yellow-bulb" : "dark-bulb"
+        };
+      }
+    },
+
+    "trafic-light-device/green-bulb": {
+      style(states) {
+        return {
+          bulbColor: states.illuminated ? "green-bulb" : "dark-bulb"
+        };
+      }
+    }
   }
 });

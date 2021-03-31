@@ -22,16 +22,16 @@ qx.Class.define("fsm.light.Device", {
 
       switch (id) {
         case "red-bulb":
-          control = new fsm.light.Bulb();
-          this._addAt(control, 0, {flex: 1});
+          control = new fsm.light.Bulb("red-bulb");
+          this._addAt(control, 0, {flex: 2});
           break;
         case "yellow-bulb":
-          control = new fsm.light.Bulb();
+          control = new fsm.light.Bulb("yellow-bulb");
           this._addAt(control, 1, {flex: 1});
           break;
         case "green-bulb":
-          control = new fsm.light.Bulb();
-          this._addAt(control, 2, {flex: 1});
+          control = new fsm.light.Bulb("green-bulb");
+          this._addAt(control, 2, {flex: 2});
       }
 
       return control || this.base(arguments, id);
