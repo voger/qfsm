@@ -1,0 +1,13 @@
+{
+  "libraries": [
+    {
+      "library_name": "logpane",
+      "library_version": "1.0.3",
+      "path": "qx_packages/qooxdoo_qxl_logpane_v1_0_3",
+      "uri": "qooxdoo/qxl.logpane",
+      "repo_name": "qooxdoo/qxl.logpane",
+      "repo_tag": "v1.0.3"
+    }
+  ],
+  "version": "2.1.0"
+}

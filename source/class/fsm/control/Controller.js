@@ -1,10 +1,10 @@
-qx.Classs.define("fsm.controller.Controller", {
+qx.Class.define("fsm.control.Controller", {
   extend: qx.core.Object,
 
   properties: {
     view: {
       nullable: true,
-      check: "Widget",
+      check: "qx.ui.core.Widget",
       apply: "_applyView"
     },
 
@@ -15,41 +15,38 @@ qx.Classs.define("fsm.controller.Controller", {
   },
 
   construct(device, view) {
-    this.setDevice(device);
-    this.setView(view);
+    if (device) {
+      this.setDevice(device);
+    }
 
-    this.__viewListeners = [];
+    if (view) {
+      this.setView(view);
+    }
   },
 
   members: {
-    // keep references of listeners
-    // attached to views for later removal
-    // if needed
-    __viewListeners: null,
+    powerOnDevice() {
+      this.getDevice()?.powerOn();
+    },
 
-    _applyView(val, old) {
-      const listeners = this.__viewListeners;
+    powerOffDevice() {
+      this.getDevice()?.powerOff();
+    },
 
-      // first cleanup the old view
-      if (old !== null) {
-        listeners.forEach(function (listenerId) {
-          old.removeListenerById(listenerId);
-        }, this);
-        qx.lang.Array.removeAll(listeners);
-      }
+    turnGreen(status = true) {
+      this.getDevice()?.turnGreenOn(status);
+    },
 
-      // then add listeners to the new view
-      // save listeners resferences in case we want to remove
-      // them later
-      let reference;
-      reference = val.addListener("powerOn", /* handle device power on */, this);
-      listeners.push(reference);
-      reference = val.addListener("powerOff", /* handle device power off */, this);
-      listeners.push(reference);
-      reference = val.addListener("turnGreen", /* hande device turn green */, this);
-      listeners.push(reference);
-      reference = val.addListener("turnRed", /* handle device turn red */, this);
-      listeners.push(reference);
+    turnYellow() {
+      this.getDevice()?.turnYellow();
+    },
+
+    turnRed() {
+      this.getDevice()?.turnRed();
+    },
+
+    _applyView(val) {
+      val.setController(this);
     }
   }
 });

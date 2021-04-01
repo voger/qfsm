@@ -5,20 +5,22 @@ qx.Class.define("fsm.light.Bulb", {
     bulbColor: {
       nullable: true,
       themeable: true,
-      check: "Color"
+      init: null,
+      // check: "Color",
+      apply: "_applyBulbColor"
     },
 
     illumination: {
       nullable: false,
-      init: true,
+      init: false,
       check: "Boolean",
       apply: "_applyIllumination"
     },
 
-    appearance: {
-      refine: true,
-      init: "dark-bulb"
-    },
+    // appearance: {
+    //   refine: true,
+    //   init: "dark-bulb"
+    // },
 
     syncDimension: {
       refine: true,
@@ -33,10 +35,6 @@ qx.Class.define("fsm.light.Bulb", {
    */
   construct(color) {
     this.base(arguments);
-
-    if (color) {
-      this.setBulbColor(color);
-    }
 
     // enforce _apply
     this.initIllumination();
@@ -63,8 +61,17 @@ qx.Class.define("fsm.light.Bulb", {
     },
 
     _applyIllumination(val) {
-      val ? this.addState("illuminated") : this.removeState("illuminated");
+      if (val) {
+        this.addState("illuminated");
+      } else {
+        this.removeState("illuminated");
+      }
+
       this.update();
+    },
+
+    _applyBulbColor(val) {
+      this.setAppearance(val);
     },
 
     // override
@@ -81,6 +88,7 @@ qx.Class.define("fsm.light.Bulb", {
       const bulbColor = qx.theme.manager.Color.getInstance().resolve(this.getBulbColor());
 
       context.fillStyle = bulbColor;
+      context.clearRect(0, 0, width, height);
 
       context.beginPath();
 

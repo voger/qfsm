@@ -53,9 +53,12 @@ qx.Theme.define("fsm.theme.Appearance", {
     },
 
     "trafic-light-device/green-bulb": {
+      alias: "widget",
       style(states) {
+        const bulbColor = states.illuminated ? "green-bulb" : "dark-bulb";
+
         return {
-          bulbColor: states.illuminated ? "green-bulb" : "dark-bulb"
+          bulbColor: bulbColor
         };
       }
     }
