@@ -28,6 +28,16 @@ qx.Class.define("fsm.control.View", {
     const greenButton = new qx.ui.form.ToggleButton(this.tr("Turn Green"));
     greenButton.addListener("changeValue", this.turnGreen, this);
     this._add(greenButton);
+
+
+    const yellowButton = new qx.ui.form.ToggleButton(this.tr("Turn Yellow"));
+    yellowButton.addListener("changeValue", this.turnYellow, this);
+    this._add(yellowButton);
+
+
+    const redButton = new qx.ui.form.ToggleButton(this.tr("Turn Red"));
+    redButton.addListener("changeValue", this.turnRed, this);
+    this._add(redButton);
   },
 
   members: {
@@ -42,6 +52,16 @@ qx.Class.define("fsm.control.View", {
     turnGreen(evt) {
       const val = evt.getData();
       this.getController()?.turnGreen(val);
+    },
+
+    turnYellow(evt) {
+      const val = evt.getData();
+      this.getController()?.turnYellow(val);
+    },
+
+    turnRed(evt) {
+      const val = evt.getData();
+      this.getController()?.turnRed(val);
     },
 
     _applyController(val) {

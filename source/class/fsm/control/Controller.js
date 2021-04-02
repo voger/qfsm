@@ -33,16 +33,16 @@ qx.Class.define("fsm.control.Controller", {
       this.getDevice()?.powerOff();
     },
 
-    turnGreen(status = true) {
+    turnGreen(status = false) {
       this.getDevice()?.turnGreenOn(status);
     },
 
-    turnYellow() {
-      this.getDevice()?.turnYellow();
+    turnYellow(status = false) {
+      this.getDevice()?.turnYellowOn(status);
     },
 
-    turnRed() {
-      this.getDevice()?.turnRed();
+    turnRed(status = false) {
+      this.getDevice()?.turnRedOn(status);
     },
 
     _applyView(val) {
