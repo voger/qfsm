@@ -58,7 +58,7 @@ qx.Theme.define("fsm.theme.Appearance", {
         const bulbColor = states.illuminated ? "green-bulb" : "dark-bulb";
 
         return {
-          bulbColor: bulbColor
+          bulbColor: bulbColor,
         };
       }
     }

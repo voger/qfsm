@@ -1,5 +1,6 @@
 qx.Class.define("fsm.light.Bulb", {
   extend: qx.ui.embed.Canvas,
+  include: [qx.ui.core.MNativeOverflow],
 
   properties: {
     bulbColor: {
@@ -17,11 +18,6 @@ qx.Class.define("fsm.light.Bulb", {
       apply: "_applyIllumination"
     },
 
-    // appearance: {
-    //   refine: true,
-    //   init: "dark-bulb"
-    // },
-
     syncDimension: {
       refine: true,
       init: true
@@ -36,6 +32,7 @@ qx.Class.define("fsm.light.Bulb", {
   construct(color) {
     this.base(arguments);
 
+    this.setOverflowY("visible");
     // enforce _apply
     this.initIllumination();
 
@@ -93,7 +90,7 @@ qx.Class.define("fsm.light.Bulb", {
       context.beginPath();
 
       if (this.getIllumination()) {
-        context.shadowBlur = 20;
+        context.shadowBlur = 29;
         context.shadowColor = bulbColor;
       } else {
         context.shadowBlur = 0;
@@ -115,6 +112,6 @@ qx.Class.define("fsm.light.Bulb", {
       context.beginPath();
       context.arc(hCenter - 4, vCenter, bulbRadius - 8, 0, Math.PI * 2);
       context.fill();
-    }
+    },
   }
 });
