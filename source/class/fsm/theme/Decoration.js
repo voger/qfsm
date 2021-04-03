@@ -49,8 +49,6 @@ qx.Theme.define("fsm.theme.Decoration", {
       }
     },
 
-
-
     "red-bulb": {
       style: {
         radius: 50000,
@@ -61,5 +59,13 @@ qx.Theme.define("fsm.theme.Decoration", {
       }
     },
 
+    "bulb-reflection": {
+      style: {
+        radius: 50000,
+        widthLeft: 0,
+        widthRight: 4,
+        color: "bulb-reflection"
+      }
+    }
   }
 });

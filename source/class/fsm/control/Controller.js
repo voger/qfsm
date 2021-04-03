@@ -25,10 +25,18 @@ qx.Class.define("fsm.control.Controller", {
   },
 
   members: {
+    /**
+     * Power on the device.
+     *
+     */
     powerOnDevice() {
       this.getDevice()?.powerOn();
     },
 
+    /**
+     * Power off the device.
+     *
+     */
     powerOffDevice() {
       this.getDevice()?.powerOff();
     },

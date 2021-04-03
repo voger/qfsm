@@ -28,6 +28,7 @@ qx.Class.define("fsm.light.Bulb", {
     this.setAllowStretchX(false);
     this.setAllowStretchY(false);
 
+    this.__addReflection();
     // enforce _apply
     this.initIllumination();
   },
@@ -58,7 +59,18 @@ qx.Class.define("fsm.light.Bulb", {
     },
 
     _applyBulbColor(val) {
-    this.setBackgroundColor(val);
+      this.setBackgroundColor(val);
+    },
+
+    // creates a widget that will be styled as reflection
+    __addReflection() {
+      const reflection = new qx.ui.core.Widget();
+      reflection.setAppearance("bulb-reflection");
+      reflection.setAllowStretchX(false);
+      reflection.setAllowStretchY(false);
+
+      this._setLayout(new qx.ui.layout.Canvas());
+      this._add(reflection, {edge: 0});
     }
   }
 });

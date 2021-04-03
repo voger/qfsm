@@ -82,6 +82,18 @@ qx.Theme.define("fsm.theme.Appearance", {
           decorator: states.illuminated ? "green-bulb" : "dark-bulb"
         };
       }
+    },
+
+    "bulb-reflection": {
+      style() {
+        return {
+          decorator: "bulb-reflection",
+          width: 30,
+          height: 30,
+          marginTop: 5,
+          marginLeft: 5
+        };
+      }
     }
   }
 });
