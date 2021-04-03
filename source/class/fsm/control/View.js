@@ -17,8 +17,8 @@ qx.Class.define("fsm.control.View", {
 
     this._setLayout(new qx.ui.layout.VBox());
 
-    this._add(this.__buttonsPanel());
-    this._add(this.__logger());
+    this._add(this.__buttonsPanel(), {flex: 0});
+    this._add(this.__logger(), {flex: 1});
   },
 
   members: {
