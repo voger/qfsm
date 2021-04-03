@@ -17,7 +17,24 @@ qx.Class.define("fsm.MainView", {
 
     const view = new fsm.control.View();
 
-    const controller = new fsm.control.Controller(device, view);
-    this._add(view, {right: "60%"});
+    new fsm.control.Controller(device, view);
+
+    const win = new qx.ui.window.Window(this.tr("Traffic Control Center")).set({
+      allowClose: false,
+      showClose: false,
+      allowMaximize: false,
+      showMaximize: false,
+      allowMinimize: false,
+      showMinimize: false,
+      showStatusbar: true,
+      width: 600,
+      height: 400,
+      layout: new qx.ui.layout.Grow()
+    });
+
+    win.add(view);
+
+    win.moveTo(600, 200);
+    win.open();
   }
 });
