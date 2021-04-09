@@ -12,6 +12,13 @@ qx.Class.define("fsm.light.Device", {
       themeable: true,
       nullable: true,
       apply: "_applySpacing"
+    },
+
+    status: {
+      check: ["on", "off"],
+      nullable: false,
+      init: "off",
+      apply: "_applyStatus"
     }
   },
 
@@ -53,24 +60,63 @@ qx.Class.define("fsm.light.Device", {
       return control || this.base(arguments, id);
     },
 
-    turnGreenOn(status = true) {
-      const bulb = this.getChildControl("green-bulb");
-      status ? bulb.switchOn() : bulb.switchOff();
+    turnGreenOn() {
+      if (this.isOn()) {
+        this.getChildControl("green-bulb").switchOn();
+      }
     },
 
-    turnYellowOn(status = true) {
-      const bulb = this.getChildControl("yellow-bulb");
-      status ? bulb.switchOn() : bulb.switchOff();
+    turnGreenOff() {
+      this.getChildControl("green-bulb").switchOff();
     },
 
-    turnRedOn(status = true) {
-      const bulb = this.getChildControl("red-bulb");
-      status ? bulb.switchOn() : bulb.switchOff();
+    turnYellowOn() {
+      if (this.isOn()) {
+        this.getChildControl("yellow-bulb").switchOn();
+      }
+    },
+
+    turnYellowOff() {
+      this.getChildControl("yellow-bulb").switchOff();
+    },
+
+    turnRedOn() {
+      if (this.isOn()) {
+        this.getChildControl("red-bulb").switchOn();
+      }
+    },
+
+    turnRedOff() {
+      this.getChildControl("red-bulb").switchOff();
+    },
+
+    isOn() {
+      return this.getStatus() === "on";
+    },
+
+    isOff() {
+      return this.getStatus() === "off";
+    },
+
+    powerOn() {
+      this.setStatus("on");
+    },
+
+    powerOff() {
+      this.setStatus("off");
     },
 
     _applySpacing(value) {
       var layout = this._getLayout();
       value == null ? layout.resetSpacing() : layout.setSpacing(value);
+    },
+
+    _applyStatus(val) {
+      if (val === "off") {
+        this.turnRedOff();
+        this.turnYellowOff();
+        this.turnGreenOff();
+      }
     }
   }
 });

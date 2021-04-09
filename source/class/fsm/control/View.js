@@ -23,11 +23,11 @@ qx.Class.define("fsm.control.View", {
 
   members: {
     turnOn() {
-      this.getController()?.turnOn();
+      this.getController()?.powerOnDevice();
     },
 
     turnOff() {
-      this.getController()?.turnOff();
+      this.getController()?.powerOffDevice();
     },
 
     turnGreen(evt) {
