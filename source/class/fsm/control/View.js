@@ -94,12 +94,12 @@ qx.Class.define("fsm.control.View", {
       const container = new qx.ui.container.Composite(new qx.ui.layout.HBox());
       const buttons = this.__buttons;
 
-      const onButton = new qx.ui.form.ToggleButton(this.tr("Power On"));
+      const onButton = new fsm.control.ToggleButton(this.tr("Power On"));
       onButton.addListener("changeValue", this.turnOn, this);
       container.add(onButton);
       buttons.set("onButton", onButton);
 
-      const offButton = new qx.ui.form.ToggleButton(this.tr("Power Off"));
+      const offButton = new fsm.control.ToggleButton(this.tr("Power Off"));
       offButton.setValue(true);
       offButton.addListener("changeValue", this.turnOff, this);
       container.add(offButton);
@@ -109,17 +109,17 @@ qx.Class.define("fsm.control.View", {
 
       powerGroup.add(onButton, offButton);
 
-      const greenButton = new qx.ui.form.ToggleButton(this.tr("Turn Green"));
+      const greenButton = new fsm.control.ToggleButton(this.tr("Turn Green"));
       greenButton.addListener("changeValue", this.turnGreen, this);
       container.add(greenButton);
       buttons.set("greenButton", greenButton);
 
-      const yellowButton = new qx.ui.form.ToggleButton(this.tr("Turn Yellow"));
+      const yellowButton = new fsm.control.ToggleButton(this.tr("Turn Yellow"));
       yellowButton.addListener("changeValue", this.turnYellow, this);
       container.add(yellowButton);
       buttons.set("yellowButton", yellowButton);
 
-      const redButton = new qx.ui.form.ToggleButton(this.tr("Turn Red"));
+      const redButton = new fsm.control.ToggleButton(this.tr("Turn Red"));
       redButton.addListener("changeValue", this.turnRed, this);
       container.add(redButton);
       buttons.set("redButton", redButton);
