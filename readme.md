@@ -7,7 +7,6 @@ The class `fsm.control.Controller` has a finite state machine that controls the 
 
 It looks like this:
 
-![looks_like_this](https://github.com/voger/qfsm/blob/master/screenshoots/light.png)
-
+![looks_like_this](https://github.com/voger/qfsm/blob/master/screenshoot/light.png)
 
 
