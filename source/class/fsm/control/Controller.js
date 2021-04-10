@@ -1,5 +1,6 @@
 qx.Class.define("fsm.control.Controller", {
   extend: qx.core.Object,
+  include: [qx.core.MLogging],
 
   properties: {
     view: {
@@ -84,7 +85,7 @@ qx.Class.define("fsm.control.Controller", {
       // qx.util.fsm.FiniteStateMachine.DebugFlags.EVENTS |
       //   qx.util.fsm.FiniteStateMachine.DebugFlags.TRANSITIONS |
       //   qx.util.fsm.FiniteStateMachine.DebugFlags.FUNCTION_DETAIL |
-        qx.util.fsm.FiniteStateMachine.DebugFlags.OBJECT_NOT_FOUND
+      qx.util.fsm.FiniteStateMachine.DebugFlags.OBJECT_NOT_FOUND
     );
 
     fsm.start();
@@ -264,7 +265,6 @@ qx.Class.define("fsm.control.Controller", {
             "controller": "to_Red"
           },
 
-
           "GREEN": {
             "controller": "to_Green"
           }
@@ -279,6 +279,7 @@ qx.Class.define("fsm.control.Controller", {
         nextState: "On",
         predicate: true,
         ontransition: () => {
+          this.info("Changing device to On");
           this.fireDataEvent("changeState", this.constructor.STATE_ON);
         }
       };
@@ -291,6 +292,7 @@ qx.Class.define("fsm.control.Controller", {
         nextState: "Off",
         predicate: true,
         ontransition: () => {
+          this.info("Changing device to Off");
           this.fireDataEvent("changeState", this.constructor.STATE_OFF);
         }
       };
@@ -303,6 +305,7 @@ qx.Class.define("fsm.control.Controller", {
         nextState: "Red",
         predicate: true,
         ontransition: () => {
+          this.info("Changing device to Red");
           this.fireDataEvent("changeState", this.constructor.STATE_RED);
         }
       };
@@ -315,6 +318,7 @@ qx.Class.define("fsm.control.Controller", {
         nextState: "Green",
         predicate: true,
         ontransition: () => {
+          this.info("Changing device to Green");
           this.fireDataEvent("changeState", this.constructor.STATE_GREEN);
         }
       };
@@ -327,6 +331,7 @@ qx.Class.define("fsm.control.Controller", {
         nextState: "Yellow",
         predicate: true,
         ontransition: () => {
+          this.info("Changing device to Yellow");
           this.fireDataEvent("changeState", this.constructor.STATE_YELLOW);
         }
       };
@@ -343,8 +348,10 @@ qx.Class.define("fsm.control.Controller", {
         },
 
         ontransition: (fsm, event) => {
+          const waitSeconds = 3;
           // rethrow the event to be picked by the Yellow state
-          fsm.scheduleEvent(event.getType(), this, null, 3000);
+          fsm.scheduleEvent(event.getType(), this, null, waitSeconds * 1000);
+          this.info(`Changing device to Red through Yellow. Please wait ${waitSeconds} seconds.`);
           this.fireDataEvent("changeState", this.constructor.STATE_RED);
         }
       };
