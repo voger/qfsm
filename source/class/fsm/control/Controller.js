@@ -67,6 +67,7 @@ qx.Class.define("fsm.control.Controller", {
 
     const stateDeviceGreen = this.__createStateDeviceGreen();
     stateDeviceGreen.addTransition(transitionToRed);
+    stateDeviceGreen.addTransition(transitionToYellow);
     stateDeviceGreen.addTransition(transitionToOff);
     stateDeviceGreen.addTransition(this.__createTransitionGreenToRedThroughYellow());
     fsm.addState(stateDeviceGreen);
@@ -80,9 +81,9 @@ qx.Class.define("fsm.control.Controller", {
     fsm.addObject("controller", this);
 
     fsm.setDebugFlags(
-      qx.util.fsm.FiniteStateMachine.DebugFlags.EVENTS |
-        qx.util.fsm.FiniteStateMachine.DebugFlags.TRANSITIONS |
-        qx.util.fsm.FiniteStateMachine.DebugFlags.FUNCTION_DETAIL |
+      // qx.util.fsm.FiniteStateMachine.DebugFlags.EVENTS |
+      //   qx.util.fsm.FiniteStateMachine.DebugFlags.TRANSITIONS |
+      //   qx.util.fsm.FiniteStateMachine.DebugFlags.FUNCTION_DETAIL |
         qx.util.fsm.FiniteStateMachine.DebugFlags.OBJECT_NOT_FOUND
     );
 
@@ -202,6 +203,10 @@ qx.Class.define("fsm.control.Controller", {
 
           "GREEN": {
             "controller": "to_Green"
+          },
+
+          "YELLOW": {
+            "controller": "to_Yellow"
           }
         }
       };
@@ -228,6 +233,10 @@ qx.Class.define("fsm.control.Controller", {
 
           "RED": {
             "controller": "Green_to_Red_through_Yellow"
+          },
+
+          "YELLOW": {
+            "controller": "to_Yellow"
           }
         }
       };
@@ -253,6 +262,11 @@ qx.Class.define("fsm.control.Controller", {
 
           "RED": {
             "controller": "to_Red"
+          },
+
+
+          "GREEN": {
+            "controller": "to_Green"
           }
         }
       };
@@ -317,7 +331,7 @@ qx.Class.define("fsm.control.Controller", {
         }
       };
 
-      return new qx.util.fsm.Transition("to_Green", transitionInfo);
+      return new qx.util.fsm.Transition("to_Yellow", transitionInfo);
     },
 
     __createTransitionGreenToRedThroughYellow() {
