@@ -14,14 +14,24 @@ qx.Class.define("fsm.control.Controller", {
     }
   },
 
-  // prettier-ifnore
+  // prettier-ignore
   statics: {
-    STATE_OFF: "OFF",
-    STATE_ON: "ON",
-    STATE_SELF_TEST: "SELF_TEST",
-    STATE_RED: "RED",
-    STATE_YELLOW: "YELLOW",
-    STATE_GREEN: "GREEN"
+    STATE_OFF       : "OFF",
+    STATE_ON        : "ON",
+    STATE_SELF_TEST : "SELF_TEST",
+    STATE_RED       : "RED",
+    STATE_YELLOW    : "YELLOW",
+    STATE_GREEN     : "GREEN"
+  },
+
+  events: {
+    /**
+     * Notify subscribers that a state
+     * change has taken place. Data is
+     * the one of the entries the static
+     * values of this class.
+     */
+    "changeState": "qx.event.type.Data"
   },
 
   construct(device, view) {
@@ -146,6 +156,8 @@ qx.Class.define("fsm.control.Controller", {
           device?.turnYellowOn();
           device?.turnRedOn();
 
+          this.fireDataEvent("changeState", this.constructor.STATE_ON);
+
           // prettier-ignore
           qx.event.Timer.once(function () {
             device?.turnGreenOff();
@@ -175,6 +187,8 @@ qx.Class.define("fsm.control.Controller", {
         onentry: function () {
           const device = this.getDevice();
           device?.turnRedOn();
+
+          this.fireDataEvent("changeState", this.constructor.STATE_RED);
         },
         onexit: function () {
           const device = this.getDevice();
@@ -249,7 +263,10 @@ qx.Class.define("fsm.control.Controller", {
     __createTransitionOffToOn() {
       const transitionInfo = {
         nextState: "On",
-        predicate: true
+        predicate: true,
+        ontransition: () => {
+          this.fireDataEvent("changeState", this.constructor.STATE_ON);
+        }
       };
 
       return new qx.util.fsm.Transition("Off_to_On", transitionInfo);
@@ -258,7 +275,10 @@ qx.Class.define("fsm.control.Controller", {
     __createTransitionToOff() {
       const transitionInfo = {
         nextState: "Off",
-        predicate: true
+        predicate: true,
+        ontransition: () => {
+          this.fireDataEvent("changeState", this.constructor.STATE_OFF);
+        }
       };
 
       return new qx.util.fsm.Transition("to_Off", transitionInfo);
@@ -267,7 +287,10 @@ qx.Class.define("fsm.control.Controller", {
     __createTransitionToRed() {
       const transitionInfo = {
         nextState: "Red",
-        predicate: true
+        predicate: true,
+        ontransition: () => {
+          this.fireDataEvent("changeState", this.constructor.STATE_RED);
+        }
       };
 
       return new qx.util.fsm.Transition("to_Red", transitionInfo);
@@ -276,7 +299,10 @@ qx.Class.define("fsm.control.Controller", {
     __createTransitionToGreen() {
       const transitionInfo = {
         nextState: "Green",
-        predicate: true
+        predicate: true,
+        ontransition: () => {
+          this.fireDataEvent("changeState", this.constructor.STATE_GREEN);
+        }
       };
 
       return new qx.util.fsm.Transition("to_Green", transitionInfo);
@@ -285,7 +311,10 @@ qx.Class.define("fsm.control.Controller", {
     __createTransitionToYellow() {
       const transitionInfo = {
         nextState: "Yellow",
-        predicate: true
+        predicate: true,
+        ontransition: () => {
+          this.fireDataEvent("changeState", this.constructor.STATE_YELLOW);
+        }
       };
 
       return new qx.util.fsm.Transition("to_Green", transitionInfo);
@@ -302,6 +331,7 @@ qx.Class.define("fsm.control.Controller", {
         ontransition: (fsm, event) => {
           // rethrow the event to be picked by the Yellow state
           fsm.scheduleEvent(event.getType(), this, null, 3000);
+          this.fireDataEvent("changeState", this.constructor.STATE_RED);
         }
       };
 
