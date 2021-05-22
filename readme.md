@@ -2,7 +2,7 @@
 
 Exercise to learn how to use the qx.util.fsm package. 
 
-Design of the tafic light taken from this video https://www.youtube.com/watch?v=aKJwLN40CPs
+Design of the trafic light taken from this video https://www.youtube.com/watch?v=aKJwLN40CPs
 
 The class `fsm.control.Controller` has a finite state machine that controls the trafic light.
 
